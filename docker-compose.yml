@@ -1,0 +1,21 @@
+app:
+  build: .
+  command: lein repl :headless :host 0.0.0.0 :port 7888
+  environment:
+    TERM: xterm-256color
+  working_dir: /usr/src/app
+  volumes:
+    - ./:/usr/src/app
+  ports:
+    - "3000:3000"
+    - "3001:3001"
+    - "7000:7000"
+    - "7888:7888"
+    - "3449:3449"
+  links:
+    - db
+
+db:
+  image: postgres
+  ports:
+    - "5432:5432"
